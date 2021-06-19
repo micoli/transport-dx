@@ -1,0 +1,10 @@
+query messages {
+    messages {
+        date
+        id
+        subject
+        from {
+            address
+        }
+    }
+}

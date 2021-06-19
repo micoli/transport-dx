@@ -1,0 +1,12 @@
+overblog_graphql:
+  definitions:
+    schema:
+      query: Query
+    mappings:
+      auto_discover: false
+      types:
+        - type: annotation
+          dir: "%kernel.project_dir%/src/UserInterface/GraphQL/Type"
+          suffix: ~
+
+

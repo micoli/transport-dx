@@ -1,0 +1,20 @@
+query message($messageId: String!){
+    message(messageId: $messageId) {
+        id
+        date
+        subject
+        from {
+            address
+        }
+        recipients {
+            address
+            display
+        }
+        body
+        attachments{
+            contentId
+            contentType
+            contentDisposition
+        }
+    }
+}
