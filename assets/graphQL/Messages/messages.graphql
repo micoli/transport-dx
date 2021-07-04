@@ -1,0 +1,13 @@
+query messages($groupName: String) {
+    messages(groupName: $groupName ) {
+        date
+        id
+        subject
+        group
+        from {
+            address
+        }
+        hasDownloadableAttachments
+        hasInlinedAttachments
+    }
+}

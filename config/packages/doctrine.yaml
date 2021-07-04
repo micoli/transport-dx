@@ -1,0 +1,18 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+        types:
+            address: App\Core\Infrastructure\Persistence\AddressType
+            addresses: App\Core\Infrastructure\Persistence\AddressesType
+            headers: App\Core\Infrastructure\Persistence\HeadersType
+            attachments: App\Core\Infrastructure\Persistence\AttachmentsType
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            Domain:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Core/Domain/Entity'
+                prefix: App\Core\Domain\Entity

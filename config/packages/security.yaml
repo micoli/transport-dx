@@ -1,0 +1,17 @@
+security:
+    enable_authenticator_manager: true
+    providers:
+        users_in_memory: { memory: null }
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: users_in_memory
+
+    encoders:
+        App\Core\Domain\Entity\User:
+            algorithm: argon2i
+
+    access_control:

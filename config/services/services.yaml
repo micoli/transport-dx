@@ -1,0 +1,78 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\:
+        resource: '%kernel.project_dir%/src/*'
+        exclude:
+         - '%kernel.project_dir%/src/{Entity,Migrations,Tests,Kernel.php}'
+         - '%kernel.project_dir%/src/**/*Data.php'
+         - '%kernel.project_dir%/src/App/Core/Infrastructure/Persistence/**/*.php'
+
+    controllers:
+        namespace: App\UserInterface\Web\
+        resource: '%kernel.project_dir%/src/UserInterface/Web/**/*Controller.php'
+        tags: ['controller.service_arguments']
+
+    React\EventLoop\LoopInterface:
+        factory: ['React\EventLoop\Factory','create']
+
+    graphql_providers:
+        namespace: App\UserInterface\GraphQL\Type\
+        resource: '%kernel.project_dir%/src/UserInterface/GraphQL/Type/**/*.php'
+        exclude: '%kernel.project_dir%/src/UserInterface/GraphQL/Type/**/*Type.php'
+        public: true
+
+    Micoli\Smtp\Server\Server: ~
+
+    Micoli\Smtp\Server\Authentication\CramMd5\CramMd5AuthenticationMethod:
+        arguments:
+            $challengeDomain: 'react-smtp.tld'
+    Micoli\Smtp\Server\Authentication\Login\LoginAuthenticationMethod: ~
+    Micoli\Smtp\Server\Authentication\Plain\PlainAuthenticationMethod: ~
+    Micoli\Smtp\Server\Authentication\CramMd5\HmacMd5: ~
+
+    Micoli\Smtp\Server\Command\AuthConnectionCommand: ~
+    Micoli\Smtp\Server\Command\DataConnectionCommand: ~
+    Micoli\Smtp\Server\Command\EhloConnectionCommand: ~
+    Micoli\Smtp\Server\Command\LineConnectionCommand: ~
+    Micoli\Smtp\Server\Command\LoginConnectionCommand: ~
+    Micoli\Smtp\Server\Command\MailFromConnectionCommand: ~
+    Micoli\Smtp\Server\Command\QuitConnectionCommand: ~
+    Micoli\Smtp\Server\Command\RcptToConnectionCommand: ~
+    Micoli\Smtp\Server\Command\ResetConnectionCommand: ~
+
+    Micoli\Smtp\Server\SmtpSession\StateService: ~
+    Micoli\Smtp\Server\SmtpSession\SmtpSessionFactoryInterface:
+        class: Micoli\Smtp\Server\SmtpSession\SmtpSessionFactory
+
+    Micoli\Smtp\Server\SmtpSession\SmtpSessionConfiguration:
+        arguments:
+            $recipientLimit: 100
+            $bannerDelay: 0
+            $banner: 'Welcome to ReactPHP SMTP Server'
+            $authMethods:
+                - '@Micoli\Smtp\Server\Authentication\CramMd5\CramMd5AuthenticationMethod'
+                - '@Micoli\Smtp\Server\Authentication\Login\LoginAuthenticationMethod'
+                - '@Micoli\Smtp\Server\Authentication\Plain\PlainAuthenticationMethod'
+            $commands:
+                - '@Micoli\Smtp\Server\Command\AuthConnectionCommand'
+                - '@Micoli\Smtp\Server\Command\DataConnectionCommand'
+                - '@Micoli\Smtp\Server\Command\EhloConnectionCommand'
+                - '@Micoli\Smtp\Server\Command\LineConnectionCommand'
+                - '@Micoli\Smtp\Server\Command\LoginConnectionCommand'
+                - '@Micoli\Smtp\Server\Command\MailFromConnectionCommand'
+                - '@Micoli\Smtp\Server\Command\QuitConnectionCommand'
+                - '@Micoli\Smtp\Server\Command\RcptToConnectionCommand'
+                - '@Micoli\Smtp\Server\Command\ResetConnectionCommand'
+
+    Micoli\Smtp\Server\Authentication\IdentityValidatorInterface:
+        class: App\Core\Service\IdentityValidator
+
+    App\Core\Service\MessageService:
+        arguments:
+            $groupHeaderName: 'x-mail-group'
