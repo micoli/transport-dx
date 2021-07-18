@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use Doctrine\ORM\EntityManager;
+use Exception;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-abstract class AbstractIntegrationTest extends KernelTestCase
+abstract class AbstractIntegrationTest extends WebTestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -67,5 +68,20 @@ abstract class AbstractIntegrationTest extends KernelTestCase
         $dispatcher->addListener($eventName, function ($event) use ($eventName) {
             $this->eventCalls[$eventName][] = $event;
         }, -1000000);
+    }
+
+    public function graphqlRequest(string $payload, array $headers = []): array
+    {
+        static::ensureKernelShutdown();
+
+        $client = static::createClient();
+
+        $client->request('POST', '/graphql/', ['query' => $payload], [], $headers);
+
+        if (200 !== $client->getResponse()->getStatusCode()) {
+            throw new Exception(sprintf('ResponseCode is %s: [%s]:%s', $client->getResponse()->getStatusCode(), $payload, $client->getInternalResponse()->getContent()));
+        }
+
+        return json_decode($client->getInternalResponse()->getContent(), true);
     }
 }
