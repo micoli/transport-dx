@@ -76,6 +76,9 @@ jobs:
       - name: Run PHPUnit with coverage
         run: |
           mkdir -p build/logs
+          php bin/console do:da:create
+          php bin/console do:mi:mi -n
+          php bin/console do:fi:lo -n
           vendor/bin/phpunit --coverage-clover build/logs/clover.xml
         if: ${{ matrix.php-version == '8.0' }}
 

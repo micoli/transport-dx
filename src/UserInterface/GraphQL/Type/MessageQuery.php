@@ -8,6 +8,7 @@ use App\Core\Domain\Entity\Message;
 use App\Core\Domain\Entity\Message as EntityMessage;
 use App\Core\Repository\MessageRepository;
 use Overblog\GraphQLBundle\Annotation as GQL;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @GQL\Provider
@@ -40,6 +41,6 @@ class MessageQuery
      */
     public function getMessage(string $messageId): ?MessageGraphQLType
     {
-        return new MessageGraphQLType($this->messageRepository->getById($messageId));
+        return new MessageGraphQLType($this->messageRepository->getById(Uuid::fromString($messageId)));
     }
 }

@@ -50,10 +50,10 @@ final class MessageRepository
         );
     }
 
-    public function getById(string $messageId): ?Message
+    public function getById(UUid $messageId): ?Message
     {
         /* @return ?Message $messageId */
-        return $this->entityRepository->find(Uuid::fromString($messageId));
+        return $this->entityRepository->find($messageId);
     }
 
     /**
@@ -68,6 +68,53 @@ final class MessageRepository
             ->groupBy('m.mailGroup')
             ->getQuery()
             ->getResult();
+    }
+
+    public function changeReadStatus(
+        Uuid $messageId,
+        bool $readStatus
+    ): bool {
+        /** @var ?Message $message */
+        $message = $this->entityRepository->find($messageId);
+        if (null === $message) {
+            return false;
+        }
+        if ($readStatus) {
+            $message->read();
+        } else {
+            $message->unRead();
+        }
+        $this->save($message);
+
+        return true;
+    }
+
+    public function deleteMessagesByGroupName(string $groupName): int
+    {
+        return $this->entityManager->createQueryBuilder()
+        ->delete('Domain:Message', 'm')
+        ->where('m.mailGroup = :groupName')
+        ->setParameter('groupName', $groupName)
+        ->getQuery()
+        ->getResult();
+    }
+
+    public function deleteMessageByMessageId(Uuid $messageId): int
+    {
+        return $this->entityManager->createQueryBuilder()
+        ->delete('Domain:Message', 'm')
+        ->where('m.id = :messageId')
+        ->setParameter('messageId', $messageId, 'uuid')
+        ->getQuery()
+        ->getResult();
+    }
+
+    public function purge(): int
+    {
+        return $this->entityManager->createQueryBuilder()
+        ->delete('Domain:Message', 'm')
+        ->getQuery()
+        ->getResult();
     }
 
     public function save(Message $message): void

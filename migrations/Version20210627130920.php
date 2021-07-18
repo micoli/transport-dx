@@ -20,7 +20,7 @@ final class Version20210627130920 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE message ADD COLUMN headers CLOB NOT NULL');
+        $this->addSql('ALTER TABLE message ADD COLUMN headers CLOB NOT NULL default "[]"');
     }
 
     public function down(Schema $schema): void
