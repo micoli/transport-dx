@@ -1,5 +1,7 @@
 # Transport DX
 
+![CI](https://github.com/micoli/transport-dx/actions/workflows/ci.yml/badge.svg)
+
 Symfony 5 + ReactPHP + SmtpServer
 
 Widely inspired from https://github.com/smalot/smtp-server and https://github.com/maildev/maildev 
