@@ -2,5 +2,6 @@ query groups {
     groups {
         name
         numberOfMessage
+        numberOfUnreadMessage
     }
 }

@@ -169,7 +169,7 @@ export default function GmailTreeView({groups, className, onGroupSelected}: Infe
             nodeId={`${group.name}`}
             labelText={group.name}
             labelIcon={SupervisorAccountIcon}
-            labelInfo={`${group.numberOfMessage}`}
+            labelInfo={`${group.numberOfUnreadMessage}/${group.numberOfMessage}`}
             color="#1a73e8"
             bgColor="#e8f0fe"
           />

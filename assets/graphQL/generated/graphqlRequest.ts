@@ -33,6 +33,7 @@ export type Group = {
   __typename?: 'Group';
   name?: Maybe<Scalars['String']>;
   numberOfMessage?: Maybe<Scalars['Int']>;
+  numberOfUnreadMessage?: Maybe<Scalars['Int']>;
 };
 
 export type Header = {
@@ -55,6 +56,31 @@ export type Message = {
   headers?: Maybe<Array<Maybe<Header>>>;
   text?: Maybe<Scalars['String']>;
   html?: Maybe<Scalars['String']>;
+  isRead?: Maybe<Scalars['Boolean']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  changeReadStatus: Scalars['Boolean'];
+  deleteMessagesByGroup: Scalars['Boolean'];
+  purge: Scalars['Boolean'];
+  deleteMessageById: Scalars['Boolean'];
+};
+
+
+export type MutationChangeReadStatusArgs = {
+  messageId: Scalars['String'];
+  isRead: Scalars['Boolean'];
+};
+
+
+export type MutationDeleteMessagesByGroupArgs = {
+  groupName: Scalars['String'];
+};
+
+
+export type MutationDeleteMessageByIdArgs = {
+  messageId: Scalars['String'];
 };
 
 export type Query = {
@@ -74,6 +100,27 @@ export type QueryMessageArgs = {
   messageId: Scalars['String'];
 };
 
+export type ChangeReadStatusMutationVariables = Exact<{
+  messageId: Scalars['String'];
+  isRead: Scalars['Boolean'];
+}>;
+
+
+export type ChangeReadStatusMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'changeReadStatus'>
+);
+
+export type DeleteMessageByIdMutationVariables = Exact<{
+  messageId: Scalars['String'];
+}>;
+
+
+export type DeleteMessageByIdMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteMessageById'>
+);
+
 export type GroupsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -81,7 +128,7 @@ export type GroupsQuery = (
   { __typename?: 'Query' }
   & { groups?: Maybe<Array<Maybe<(
     { __typename?: 'Group' }
-    & Pick<Group, 'name' | 'numberOfMessage'>
+    & Pick<Group, 'name' | 'numberOfMessage' | 'numberOfUnreadMessage'>
   )>>> }
 );
 
@@ -120,7 +167,7 @@ export type MessagesQuery = (
   { __typename?: 'Query' }
   & { messages?: Maybe<Array<Maybe<(
     { __typename?: 'Message' }
-    & Pick<Message, 'date' | 'id' | 'subject' | 'group' | 'hasDownloadableAttachments' | 'hasInlinedAttachments'>
+    & Pick<Message, 'date' | 'id' | 'isRead' | 'subject' | 'group' | 'hasDownloadableAttachments' | 'hasInlinedAttachments'>
     & { from?: Maybe<(
       { __typename?: 'Address' }
       & Pick<Address, 'address'>
@@ -129,11 +176,22 @@ export type MessagesQuery = (
 );
 
 
+export const ChangeReadStatusDocument = gql`
+    mutation changeReadStatus($messageId: String!, $isRead: Boolean!) {
+  changeReadStatus(messageId: $messageId, isRead: $isRead)
+}
+    `;
+export const DeleteMessageByIdDocument = gql`
+    mutation deleteMessageById($messageId: String!) {
+  deleteMessageById(messageId: $messageId)
+}
+    `;
 export const GroupsDocument = gql`
     query groups {
   groups {
     name
     numberOfMessage
+    numberOfUnreadMessage
   }
 }
     `;
@@ -171,6 +229,7 @@ export const MessagesDocument = gql`
   messages(groupName: $groupName) {
     date
     id
+    isRead
     subject
     group
     from {
@@ -189,6 +248,12 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    changeReadStatus(variables: ChangeReadStatusMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<ChangeReadStatusMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ChangeReadStatusMutation>(ChangeReadStatusDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'changeReadStatus');
+    },
+    deleteMessageById(variables: DeleteMessageByIdMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DeleteMessageByIdMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteMessageByIdMutation>(DeleteMessageByIdDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteMessageById');
+    },
     groups(variables?: GroupsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GroupsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GroupsQuery>(GroupsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'groups');
     },

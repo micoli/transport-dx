@@ -2,6 +2,7 @@ query messages($groupName: String) {
     messages(groupName: $groupName ) {
         date
         id
+        isRead
         subject
         group
         from {

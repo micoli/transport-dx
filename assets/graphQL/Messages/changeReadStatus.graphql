@@ -1,0 +1,3 @@
+mutation changeReadStatus($messageId: String!, $isRead: Boolean!){
+    changeReadStatus(messageId: $messageId,isRead: $isRead)
+}
