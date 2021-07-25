@@ -79,7 +79,7 @@ jobs:
           php bin/console do:da:create
           php bin/console do:mi:mi -n
           php bin/console do:fi:lo -n
-          vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+          SYMFONY_DEPRECATIONS_HELPER=disabled vendor/bin/phpunit --coverage-clover build/logs/clover.xml --testdox
         if: ${{ matrix.php-version == '8.0' }}
 
       - name: Upload coverage report to Coveralls
