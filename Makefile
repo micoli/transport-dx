@@ -37,6 +37,7 @@ fix-code-standard: check-in-docker
 reload-fixture: check-in-docker
 	-php bin/console do:da:drop --force
 	php bin/console do:da:create
+	-chmod 777 var/data.db
 	php bin/console do:mi:mi -n
 	php bin/console do:fi:lo -n
 
