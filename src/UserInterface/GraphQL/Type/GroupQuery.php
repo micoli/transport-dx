@@ -27,7 +27,11 @@ class GroupQuery
     public function getGroups(): array
     {
         return array_map(
-            fn (array $group) => new GroupGraphQLType($group['mailGroup'], $group['numberOfMessage']),
+            fn (array $group) => new GroupGraphQLType(
+                $group['mailGroup'],
+                $group['numberOfMessage'],
+                (int) $group['numberOfUnreadMessage']
+            ),
             $this->messageRepository
             ->getGroups()
         );

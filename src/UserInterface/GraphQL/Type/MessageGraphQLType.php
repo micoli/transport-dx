@@ -139,4 +139,12 @@ class MessageGraphQLType
     {
         return $this->message->getHtmlContent() ?: $this->message->getTextContent();
     }
+
+    /**
+     * @GQL\Field(type="Boolean", name="isRead")
+     */
+    public function getIsRead(): bool
+    {
+        return $this->message->isRead();
+    }
 }

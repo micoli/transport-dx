@@ -13,13 +13,16 @@ class GroupGraphQLType
 {
     private ?string $name;
     private int $numberOfMessage;
+    private int $numberOfUnreadMessage;
 
     public function __construct(
         ?string $name,
-        int $numberOfMessage
+        int $numberOfMessage,
+        int $numberOfUnreadMessage
     ) {
         $this->name = $name;
         $this->numberOfMessage = $numberOfMessage;
+        $this->numberOfUnreadMessage = $numberOfUnreadMessage;
     }
 
     /**
@@ -36,5 +39,13 @@ class GroupGraphQLType
     public function getNumberOfMessage(): int
     {
         return $this->numberOfMessage;
+    }
+
+    /**
+     * @GQL\Field(type="Int", name="numberOfUnreadMessage")
+     */
+    public function getNumberOfUnreadMessage(): int
+    {
+        return $this->numberOfUnreadMessage;
     }
 }

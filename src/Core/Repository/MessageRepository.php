@@ -63,7 +63,7 @@ final class MessageRepository
     {
         return $this->entityManager
             ->createQueryBuilder()
-            ->select('m.mailGroup', 'COUNT(m.id) as numberOfMessage')
+            ->select('m.mailGroup', 'COUNT(m.id) as numberOfMessage', '(COUNT(m.id)-SUM(m.read)) as numberOfUnreadMessage')
             ->from(Message::class, 'm')
             ->groupBy('m.mailGroup')
             ->getQuery()
