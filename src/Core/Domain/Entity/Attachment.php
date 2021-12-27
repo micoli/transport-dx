@@ -77,7 +77,7 @@ final class Attachment implements JsonSerializable
         return $this->content;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'contentId' => $this->contentId,

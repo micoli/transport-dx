@@ -10,6 +10,7 @@ use App\Core\Domain\Entity\Header;
 use App\Core\Domain\Entity\Message;
 use DateTimeImmutable;
 use ZBateson\MailMimeParser\Header\AbstractHeader;
+use ZBateson\MailMimeParser\Header\AddressHeader;
 use ZBateson\MailMimeParser\Header\HeaderConsts;
 use ZBateson\MailMimeParser\Header\Part\AddressPart;
 use ZBateson\MailMimeParser\MailMimeParser;
@@ -31,7 +32,7 @@ final class MessageService
         $parsedEmail = $mailParser->parse($mailBody);
 
         return new Message(
-            new DateTimeImmutable($parsedEmail->getHeader(HeaderConsts::DATE)?->getValue() ?? ''),
+            new DateTimeImmutable($parsedEmail->getHeader(HeaderConsts::DATE)->getValue() ?? ''),
             $this->getFrom($parsedEmail),
             $this->getSubject($parsedEmail),
             $this->getToRecipients($parsedEmail),
@@ -48,9 +49,12 @@ final class MessageService
 
     private function getFrom(MailMimeParserMessage $parsedEmail): Address
     {
+        /** @var AddressHeader $addressHeader */
+        $addressHeader = $parsedEmail->getHeader(HeaderConsts::FROM);
+
         return new Address(
-            $parsedEmail->getHeader(HeaderConsts::FROM)->getValue(),
-            $parsedEmail->getHeader(HeaderConsts::FROM)?->getPersonName()
+            $addressHeader->getValue(),
+            $addressHeader->getPersonName()
         );
     }
 
@@ -64,10 +68,13 @@ final class MessageService
      */
     private function getToRecipients(MailMimeParserMessage $parsedEmail): array
     {
+        /** @var ?AddressHeader $addressHeader */
+        $addressHeader = $parsedEmail->getHeader(HeaderConsts::TO);
+
         return array_map(fn (AddressPart $address) => new Address(
             $address->getEmail(),
             $address->getName()
-        ), $parsedEmail->getHeader(HeaderConsts::TO)?->getAddresses() ?? []);
+        ), $addressHeader?->getAddresses() ?? []);
     }
 
     /**
@@ -75,10 +82,13 @@ final class MessageService
      */
     private function getCcRecipients(MailMimeParserMessage $parsedEmail): array
     {
+        /** @var ?AddressHeader $addressHeader */
+        $addressHeader = $parsedEmail->getHeader(HeaderConsts::CC);
+
         return array_map(fn (AddressPart $address) => new Address(
             $address->getEmail(),
             $address->getName()
-        ), $parsedEmail->getHeader(HeaderConsts::CC)?->getAddresses() ?? []);
+        ), $addressHeader?->getAddresses() ?? []);
     }
 
     /**
@@ -86,10 +96,13 @@ final class MessageService
      */
     private function getBccRecipients(MailMimeParserMessage $parsedEmail): array
     {
+        /** @var ?AddressHeader $addressHeader */
+        $addressHeader = $parsedEmail->getHeader(HeaderConsts::BCC);
+
         return array_map(fn (AddressPart $address) => new Address(
             $address->getEmail(),
             $address->getName()
-        ), $parsedEmail->getHeader(HeaderConsts::BCC)?->getAddresses() ?? []);
+        ), $addressHeader?->getAddresses() ?? []);
     }
 
     /**

@@ -16,7 +16,7 @@ final class AddressesType extends JsonType
         return 'addresses';
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if (null === $value) {
             return null;
@@ -54,7 +54,7 @@ final class AddressesType extends JsonType
         return array_map(fn (array $val) => new Address($val['address'], $val['display']), $vals);
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

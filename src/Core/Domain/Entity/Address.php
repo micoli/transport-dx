@@ -40,7 +40,7 @@ final class Address implements JsonSerializable
         return $this->display;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return ['address' => $this->getAddress(), 'display' => $this->getDisplay()];
     }

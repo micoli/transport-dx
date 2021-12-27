@@ -40,7 +40,7 @@ final class Header implements JsonSerializable
         return $this->value;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return ['key' => $this->getKey(), 'value' => $this->getValue()];
     }

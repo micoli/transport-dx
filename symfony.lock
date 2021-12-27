@@ -2,6 +2,9 @@
     "alecrabbit/php-cli-snake": {
         "version": "0.5.0"
     },
+    "composer/pcre": {
+        "version": "1.x-dev"
+    },
     "composer/semver": {
         "version": "3.x-dev"
     },
@@ -154,6 +157,9 @@
     "laminas/laminas-code": {
         "version": "4.5.x-dev"
     },
+    "micoli/php-watcher": {
+        "version": "dev-master"
+    },
     "micoli/react-php-smtp-server": {
         "version": "dev-master"
     },
@@ -162,6 +168,9 @@
     },
     "monolog/monolog": {
         "version": "2.x-dev"
+    },
+    "murtukov/php-code-generator": {
+        "version": "0.1.x-dev"
     },
     "myclabs/deep-copy": {
         "version": "1.x-dev"

@@ -24,7 +24,7 @@ RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} >
 && printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /usr/local/etc/php/conf.d/tzone.ini \
 && "date"
 
-RUN apk add --update make inotify-tools nodejs yarn supervisor nginx
+RUN apk add --update make inotify-tools nodejs yarn supervisor nginx git
 #    yarn global add nodemon --prefix /usr/local
 
 COPY entrypoint.sh /entrypoint.sh

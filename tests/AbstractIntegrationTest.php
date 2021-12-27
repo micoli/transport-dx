@@ -41,17 +41,17 @@ abstract class AbstractIntegrationTest extends WebTestCase
 
     protected function getService(string $serviceName): object
     {
-        return self::$container->get($serviceName);
+        return self::getContainer()->get($serviceName);
     }
 
     protected function getParameter(string $serviceName): mixed
     {
-        return self::$container->getParameter($serviceName);
+        return self::getContainer()->getParameter($serviceName);
     }
 
     protected function setService(string $serviceId, object $service): void
     {
-        self::$container->set($serviceId, $service);
+        self::getContainer()->set($serviceId, $service);
     }
 
     protected function resetExpectedEvents(string $eventName): void

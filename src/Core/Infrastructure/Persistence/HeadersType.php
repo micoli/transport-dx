@@ -16,7 +16,7 @@ final class HeadersType extends JsonType
         return 'headers';
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if (null === $value) {
             return null;
@@ -56,7 +56,7 @@ final class HeadersType extends JsonType
         return array_map(fn (array $val) => new Header($val['key'], $val['value']), $vals);
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

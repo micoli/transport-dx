@@ -6,52 +6,63 @@
         "ext-iconv": "*",
         "ext-openssl": "*",
         "composer/package-versions-deprecated": "1.11.99.2",
-        "doctrine/doctrine-bundle": "^2.4.2",
+        "doctrine/doctrine-bundle": "^2.6",
         "doctrine/doctrine-migrations-bundle": "^3.1.1",
         "doctrine/orm": "^2.9",
         "fzaninotto/faker": "1.9.x-dev",
         "micoli/react-php-smtp-server": "dev-master",
         "nyholm/psr7": "^1.1",
-        "overblog/graphql-bundle": "^0.13.6",
+        "overblog/graphql-bundle": "*",
         "swiftmailer/swiftmailer": "^6.0",
-        "symfony/console": "5.2.*",
-        "symfony/event-dispatcher": "5.2.*",
+        "symfony/console": "6.0.*",
+        "symfony/event-dispatcher": "6.0.*",
         "symfony/flex": "^1.1",
-        "symfony/framework-bundle": "5.2.*",
-        "symfony/http-foundation": "5.2.*",
-        "symfony/mime": "5.2.*",
+        "symfony/framework-bundle": "6.0.*",
+        "symfony/http-foundation": "6.0.*",
+        "symfony/mime": "6.0.*",
         "symfony/monolog-bundle": "^3.7",
-        "symfony/proxy-manager-bridge": "5.2.*",
+        "symfony/proxy-manager-bridge": "6.0.*",
         "symfony/psr-http-message-bridge": "^2.1",
-        "symfony/security-bundle": "5.2.*",
-        "symfony/twig-bundle": "5.2.*",
-        "symfony/uid": "5.2.*",
-        "symfony/validator": "5.2.*",
+        "symfony/security-bundle": "6.0.*",
+        "symfony/twig-bundle": "6.0.*",
+        "symfony/uid": "6.0.*",
+        "symfony/validator": "6.0.*",
         "symfony/webpack-encore-bundle": "^1.12",
-        "symfony/yaml": "5.2.*",
+        "symfony/yaml": "6.0.*",
         "zbateson/mail-mime-parser": "^1.3"
     },
     "require-dev": {
-        "dama/doctrine-test-bundle": "7.0.x-dev",
+        "dama/doctrine-test-bundle": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.4.0",
         "friendsofphp/php-cs-fixer": "^3.0",
         "mockery/mockery": "^1.4",
         "php-coveralls/php-coveralls": "dev-master",
         "phpstan/phpstan": "^0.12.90",
         "phpunit/phpunit": "^9.5",
-        "seregazhuk/php-watcher": "dev-master",
-        "symfony/browser-kit": "5.2.*",
-        "symfony/css-selector": "5.2.*",
-        "symfony/dotenv": "5.2.*",
-        "symfony/phpunit-bridge": "5.2.*",
+        "micoli/php-watcher": "dev-master",
+        "symfony/browser-kit": "6.0.*",
+        "symfony/css-selector": "6.0.*",
+        "symfony/dotenv": "6.0.*",
+        "symfony/phpunit-bridge": "6.0.*",
         "symfony/stopwatch": "5.4.x-dev",
-        "symfony/web-profiler-bundle": "5.2.x-dev"
+        "symfony/web-profiler-bundle": "6.0.x-dev"
     },
     "minimum-stability": "dev",
     "repositories": [
         {
             "type": "vcs",
             "url": "https://github.com/micoli/react-php-smtp-server"
+        },{
+            "type": "package",
+            "package": {
+                "name": "micoli/php-watcher",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/micoli/php-watcher.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
         }
     ],
     "config": {
@@ -96,7 +107,7 @@
         "extra": {
             "symfony": {
                 "allow-contrib": true,
-                "require": "5.2.*"
+                "require": "6.0.*"
             }
         }
     }

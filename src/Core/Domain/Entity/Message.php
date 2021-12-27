@@ -17,7 +17,7 @@ final class Message
     /**
      * @ORM\Id
      * @ORM\Column(type="uuid")
-     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private UuidV4 $id;
 

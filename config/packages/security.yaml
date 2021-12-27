@@ -10,8 +10,9 @@ security:
             lazy: true
             provider: users_in_memory
 
-    encoders:
-        App\Core\Domain\Entity\User:
-            algorithm: argon2i
+    password_hashers:
+        harsh:
+            algorithm: auto
+            cost: 15
 
     access_control:

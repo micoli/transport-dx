@@ -16,7 +16,7 @@ final class AttachmentsType extends JsonType
         return 'attachments';
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if (null === $value) {
             return null;
@@ -62,7 +62,7 @@ final class AttachmentsType extends JsonType
         ), $vals);
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }
