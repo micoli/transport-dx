@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "beb58f155d38875015867ab9e0048eea",
+    "content-hash": "7da4430adf8f3e292170bbf11583b4d4",
     "packages": [
         {
             "name": "alecrabbit/php-cli-snake",
@@ -1713,6 +1713,61 @@
                 "source": "https://github.com/doctrine/sql-formatter/tree/1.2.x"
             },
             "time": "2021-11-07T15:30:51+00:00"
+        },
+        {
+            "name": "drift/dbal",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/driftphp/reactphp-dbal.git",
+                "reference": "3be598cd8e49b4f5949f03161cf0e80b4411654f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/driftphp/reactphp-dbal/zipball/3be598cd8e49b4f5949f03161cf0e80b4411654f",
+                "reference": "3be598cd8e49b4f5949f03161cf0e80b4411654f",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^3",
+                "php": "^7.4 || ^8.0",
+                "react/event-loop": "^1"
+            },
+            "require-dev": {
+                "clue/block-react": "^1",
+                "clue/reactphp-sqlite": "^1",
+                "phpunit/phpunit": "^9",
+                "react/mysql": "^0.5",
+                "voryx/pgasync": "^2"
+            },
+            "suggest": {
+                "clue/reactphp-sqlite": "SQLite usage",
+                "react/mysql": "MySQL usage",
+                "voryx/pgasync": "PostgreSQL Usage"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Drift\\DBAL\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Morera",
+                    "email": "yuhu@mmoreram.com"
+                }
+            ],
+            "description": "DBAL for ReactPHP on top of Doctrine",
+            "support": {
+                "issues": "https://github.com/driftphp/reactphp-dbal/issues",
+                "source": "https://github.com/driftphp/reactphp-dbal/tree/0.1.4"
+            },
+            "time": "2021-03-18T17:54:59+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -3689,6 +3744,57 @@
                 "source": "https://github.com/reactphp/http/tree/v0.8.7"
             },
             "time": "2020-07-05T11:32:28+00:00"
+        },
+        {
+            "name": "react/mysql",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/friends-of-reactphp/mysql.git",
+                "reference": "7b4428da4d625787a0ce1420b497dadcd70ff7bd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/friends-of-reactphp/mysql/zipball/7b4428da4d625787a0ce1420b497dadcd70ff7bd",
+                "reference": "7b4428da4d625787a0ce1420b497dadcd70ff7bd",
+                "shasum": ""
+            },
+            "require": {
+                "evenement/evenement": "^3.0 || ^2.1 || ^1.1",
+                "php": ">=5.4.0",
+                "react/event-loop": "^1.2",
+                "react/promise": "^2.7",
+                "react/promise-stream": "^1.1",
+                "react/promise-timer": "^1.8",
+                "react/socket": "^1.9"
+            },
+            "require-dev": {
+                "clue/block-react": "^1.2",
+                "phpunit/phpunit": "^9.3 || ^5.7 || ^4.8.35"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\MySQL\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Async MySQL database client for ReactPHP.",
+            "keywords": [
+                "async",
+                "database",
+                "mysql",
+                "reactphp"
+            ],
+            "support": {
+                "issues": "https://github.com/friends-of-reactphp/mysql/issues",
+                "source": "https://github.com/friends-of-reactphp/mysql/tree/v0.5.6"
+            },
+            "time": "2021-12-14T11:25:28+00:00"
         },
         {
             "name": "react/promise",
@@ -12021,9 +12127,11 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "alecrabbit/php-cli-snake": 20,
+        "drift/dbal": 20,
         "fzaninotto/faker": 20,
         "micoli/react-php-smtp-server": 20,
         "react/child-process": 20,
+        "react/mysql": 20,
         "yosymfony/resource-watcher": 20,
         "php-coveralls/php-coveralls": 20,
         "symfony/stopwatch": 20,

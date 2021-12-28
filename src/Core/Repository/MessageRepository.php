@@ -121,5 +121,6 @@ final class MessageRepository
     {
         $this->entityManager->persist($message);
         $this->entityManager->flush();
+        $this->entityManager->clear(Message::class);
     }
 }

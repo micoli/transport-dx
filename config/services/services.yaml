@@ -76,3 +76,7 @@ services:
     App\Core\Service\MessageService:
         arguments:
             $groupHeaderName: 'x-mail-group'
+
+    App\Infrastructure\Persistence\MysqlConnection:
+        arguments:
+            $url: '%env(resolve:DATABASE_URL)%'

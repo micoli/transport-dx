@@ -118,6 +118,9 @@
     "doctrine/sql-formatter": {
         "version": "1.2.x-dev"
     },
+    "drift/dbal": {
+        "version": "dev-master"
+    },
     "egulias/email-validator": {
         "version": "3.x-dev"
     },
@@ -293,6 +296,9 @@
     },
     "react/http": {
         "version": "v0.8.7"
+    },
+    "react/mysql": {
+        "version": "dev-master"
     },
     "react/promise": {
         "version": "2.x-dev"
