@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+
+<?php
+
+use seregazhuk\PhpWatcher\ConsoleApplication;
+use seregazhuk\PhpWatcher\WatcherCommand;
+
+require __DIR__.'/../vendor/autoload.php';
+
+$command = new WatcherCommand();
+$application = new ConsoleApplication();
+$application->add($command);
+
+$application->setDefaultCommand($command->getName(), true);
+$application->run();

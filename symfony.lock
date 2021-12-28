@@ -157,9 +157,6 @@
     "laminas/laminas-code": {
         "version": "4.5.x-dev"
     },
-    "micoli/php-watcher": {
-        "version": "dev-master"
-    },
     "micoli/react-php-smtp-server": {
         "version": "dev-master"
     },
